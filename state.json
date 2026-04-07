@@ -1,0 +1,15 @@
+{
+  "v": 1,
+  "ts": 0,
+  "status": "idle",
+  "task": null,
+  "activeAgents": [],
+  "feed": [
+    {
+      "agent": "adi",
+      "text": "Escritório online. Aguardando demandas do Cowork...",
+      "ts": 0,
+      "bubble": false
+    }
+  ]
+}
