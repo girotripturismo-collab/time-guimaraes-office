@@ -257,7 +257,7 @@ const ORC_RESP = [
   t=>`Roger that! Thiago, Rafael — vocês entram em ação.`,
 ];
 
-// ── COLLISION GRID ───────────────────────────────────────────
+// ── COLLISION GRID ──────────────────────────────────────────
 const GRID = (() => {
   const g = Array.from({length:MH}, ()=>new Uint8Array(MW));
   for(const r of ROOMS)
@@ -710,7 +710,10 @@ async function pollState(){
     if(data.sha === lastSha) return;   // nenhuma mudança
     lastSha = data.sha;
 
-    const raw  = atob(data.content.replace(/\n/g,''));
+    const _b64raw = atob(data.content.replace(/\n/g,''));
+    const _u8 = new Uint8Array(_b64raw.length);
+    for(let i=0;i<_b64raw.length;i++) _u8[i]=_b64raw.charCodeAt(i);
+    const raw = new TextDecoder('utf-8').decode(_u8);
     const state= JSON.parse(raw);
     applyState(state);
   }catch(e){ pollErrors++; }
