@@ -71,31 +71,26 @@ body{font-family:'Inter',sans-serif;font-size:13px;color:var(--text)}
 .s-dot.busy{background:var(--red)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* ── CHAT ── */
-#chat-zone{display:flex;flex-direction:column;border-top:1px solid var(--border);height:220px;flex-shrink:0}
+/* ── LIVE FEED ── */
+#chat-zone{display:flex;flex-direction:column;border-top:1px solid var(--border);height:240px;flex-shrink:0}
 #chat-head{
   padding:7px 12px;font-size:10px;font-weight:600;color:var(--text2);
-  letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border);flex-shrink:0
+  letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--border);
+  flex-shrink:0;display:flex;align-items:center;gap:6px
 }
+#sync-dot{width:6px;height:6px;border-radius:50%;background:var(--text2);flex-shrink:0;transition:background .4s}
+#sync-dot.live{background:var(--green);box-shadow:0 0 6px var(--green);animation:blink 2s infinite}
+#sync-dot.working{background:var(--orange);box-shadow:0 0 6px var(--orange);animation:blink .8s infinite}
 #chat-msgs{flex:1;overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:4px}
 #chat-msgs::-webkit-scrollbar{width:3px}
 #chat-msgs::-webkit-scrollbar-thumb{background:var(--border)}
-.cmsg{max-width:92%;padding:6px 10px;border-radius:8px;font-size:11px;line-height:1.55}
-.cmsg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:2px}
+.cmsg{max-width:96%;padding:6px 10px;border-radius:8px;font-size:11px;line-height:1.55}
 .cmsg.bot{align-self:flex-start;background:var(--surface2);border-bottom-left-radius:2px}
+.cmsg.result{align-self:flex-start;background:rgba(76,175,80,.15);border:1px solid rgba(76,175,80,.3);border-bottom-left-radius:2px}
+.cmsg.system{align-self:center;color:var(--text2);font-size:10px;font-style:italic;background:transparent}
 .cmsg .sndr{font-size:9px;font-weight:600;opacity:.65;margin-bottom:2px}
-#chat-row{display:flex;gap:6px;padding:8px;border-top:1px solid var(--border);flex-shrink:0}
-#chat-in{
-  flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:6px;
-  padding:6px 10px;color:var(--text);font-family:inherit;font-size:11px;outline:none
-}
-#chat-in:focus{border-color:var(--accent)}
-#chat-in::placeholder{color:var(--text2)}
-#chat-btn{
-  background:var(--accent);border:none;border-radius:6px;width:32px;height:32px;
-  color:#fff;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center
-}
-#chat-btn:hover{background:var(--accent2)}
+#task-bar{padding:5px 10px;font-size:10px;color:var(--text2);border-top:1px solid var(--border);
+  background:rgba(0,0,0,.2);flex-shrink:0;display:flex;align-items:center;gap:5px;min-height:26px}
 </style>
 </head>
 <body>
@@ -114,12 +109,9 @@ body{font-family:'Inter',sans-serif;font-size:13px;color:var(--text)}
     </div>
     <div id="agent-list"></div>
     <div id="chat-zone">
-      <div id="chat-head">💬 Falar com Adi</div>
+      <div id="chat-head"><div id="sync-dot"></div><span id="chat-head-text">📡 LIVE FEED — COWORK</span></div>
       <div id="chat-msgs"></div>
-      <div id="chat-row">
-        <input id="chat-in" type="text" placeholder="Envie uma demanda ao time...">
-        <button id="chat-btn">➤</button>
-      </div>
+      <div id="task-bar"><span id="task-label">Aguardando tarefas...</span></div>
     </div>
   </aside>
 </div>
@@ -564,13 +556,6 @@ function update(){
     if(a.bubTimer>0&&--a.bubTimer===0) a.bubble=null;
   });
 
-  // ambient bubbles every ~6s
-  if(tick%120===0){
-    const a=agents[Math.floor(Math.random()*agents.length)];
-    const pool=AMBIENT[a.id];
-    if(pool){a.bubble=pool[Math.floor(Math.random()*pool.length)];a.bubTimer=110}
-  }
-
   // random wander
   if(tick%180===0){
     const a=agents[Math.floor(Math.random()*agents.length)];
@@ -688,55 +673,101 @@ function updateCards(){
 
 buildCards();
 
-// ── UI: CHAT ─────────────────────────────────────────────────
-const msgBox=document.getElementById('chat-msgs');
+// ── UI: LIVE FEED ─────────────────────────────────────────────
+const msgBox   = document.getElementById('chat-msgs');
+const taskLabel= document.getElementById('task-label');
+const syncDot  = document.getElementById('sync-dot');
 
-function addMsg(text,type,from){
-  const d=document.createElement('div');
-  d.className=`cmsg ${type}`;
-  d.innerHTML=from?`<div class="sndr">${from}</div>${text}`:text;
+function addMsg(text, type, from){
+  const d = document.createElement('div');
+  d.className = `cmsg ${type}`;
+  d.innerHTML = from ? `<div class="sndr">${from}</div>${text}` : text;
   msgBox.appendChild(d);
-  msgBox.scrollTop=9999;
+  msgBox.scrollTop = 9999;
+}
+function clearFeed(){ msgBox.innerHTML=''; }
+
+function agentLabel(id){
+  const a = agents.find(x=>x.id===id);
+  return a ? `${a.e} ${a.name} (${a.role})` : id;
 }
 
-function sendToOrchestrator(text){
-  if(!text.trim())return;
-  addMsg(text,'user','Você');
-  setTimeout(()=>{
-    const resp=ORC_RESP[Math.floor(Math.random()*ORC_RESP.length)](text);
-    addMsg(resp,'bot','Adi (Orquestrador)');
-    const adi=agents.find(a=>a.id==='adi');
-    adi.bubble='Distribuindo tarefas...';adi.bubTimer=150;adi.status='working';
+// ── REAL-TIME STATE POLLING ───────────────────────────────────
+const STATE_URL = 'https://api.github.com/repos/girotripturismo-collab/time-guimaraes-office/contents/state.json';
+let lastSha = null;
+let lastFeedLen = 0;
+let pollErrors = 0;
 
-    // pick 3-5 agents to activate
-    const pool=agents.filter(a=>a.id!=='adi').sort(()=>Math.random()-.5).slice(0,3+Math.floor(Math.random()*3));
-    pool.forEach((a,i)=>{
-      setTimeout(()=>{
-        a.status='working';
-        const msgs=AMBIENT[a.id];
-        if(msgs){a.bubble=msgs[Math.floor(Math.random()*msgs.length)];a.bubTimer=180}
-        updateCards();
-      },400+i*500);
-      setTimeout(()=>{a.status='done';updateCards()},9000+i*400);
+async function pollState(){
+  try{
+    const r = await fetch(STATE_URL + '?_=' + Date.now(), {
+      headers: { 'Accept': 'application/vnd.github.v3+json' }
     });
-    setTimeout(()=>{
-      adi.status='idle';adi.bubble=null;updateCards();
-      addMsg('✅ Missão concluída! Todos entregaram.','bot','Adi (Orquestrador)');
-    },12000);
-    updateCards();
-  },650);
+    if(!r.ok){ pollErrors++; return; }
+    const data = await r.json();
+    pollErrors = 0;
+
+    if(data.sha === lastSha) return;   // nenhuma mudança
+    lastSha = data.sha;
+
+    const raw  = atob(data.content.replace(/\n/g,''));
+    const state= JSON.parse(raw);
+    applyState(state);
+  }catch(e){ pollErrors++; }
+
+  // update sync indicator
+  syncDot.className = pollErrors > 3 ? 'sync-dot' : 'sync-dot live';
 }
 
-const chatIn=document.getElementById('chat-in');
-document.getElementById('chat-btn').addEventListener('click',()=>{sendToOrchestrator(chatIn.value);chatIn.value=''});
-chatIn.addEventListener('keydown',e=>{if(e.key==='Enter'){sendToOrchestrator(chatIn.value);chatIn.value=''}});
+function applyState(state){
+  // --- status geral dos agentes ---
+  agents.forEach(a=>{
+    const active = state.activeAgents && state.activeAgents.includes(a.id);
+    if(active){
+      a.status = (state.status === 'working') ? 'working' : 'done';
+    } else {
+      if(a.status === 'working') a.status = 'idle';
+    }
+  });
 
-// ── INITIAL MESSAGE ───────────────────────────────────────────
-setTimeout(()=>{
-  addMsg('Olá! Sou o Adi, orquestrador do Time Guimarães.<br>Qual é a demanda de hoje?','bot','Adi (Orquestrador)');
-  const adi=agents.find(a=>a.id==='adi');
-  adi.bubble='Pronto pra começar!';adi.bubTimer=120;
-},900);
+  // --- task bar ---
+  if(state.task){
+    taskLabel.innerHTML = `<b style="color:var(--orange)">▶</b> ${state.task}`;
+    syncDot.className   = 'sync-dot ' + (state.status==='working'?'working':'live');
+  } else {
+    taskLabel.textContent = 'Aguardando tarefas do Cowork...';
+    syncDot.className = 'sync-dot live';
+  }
+
+  // --- feed de mensagens novas ---
+  const feed = state.feed || [];
+
+  // se o feed foi resetado (nova tarefa), limpa o painel
+  if(feed.length < lastFeedLen){ clearFeed(); lastFeedLen = 0; }
+
+  const novos = feed.slice(lastFeedLen);
+  novos.forEach((msg, i)=>{
+    setTimeout(()=>{
+      const tipo = msg.type === 'result' ? 'result' : 'bot';
+      addMsg(msg.text, tipo, agentLabel(msg.agent));
+      // balão no mapa só para agentes em ação
+      const ag = agents.find(a=>a.id===msg.agent);
+      if(ag && msg.bubble !== false){
+        const short = msg.text.replace(/<[^>]+>/g,'').slice(0,52);
+        ag.bubble    = short + (msg.text.length > 52 ? '…' : '');
+        ag.bubTimer  = 160;
+      }
+      updateCards();
+    }, i * 280);
+  });
+  lastFeedLen = feed.length;
+  updateCards();
+}
+
+// ── KICK-OFF ──────────────────────────────────────────────────
+addMsg('Conectando ao Cowork...', 'system', null);
+pollState();
+setInterval(pollState, 5000);
 </script>
 </body>
 </html>
