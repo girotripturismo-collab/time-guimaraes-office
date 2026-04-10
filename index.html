@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Time Guimarães — Escritório Virtual</title>
+<title>Time GuimarÃ£es â EscritÃ³rio Virtual</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
@@ -18,7 +18,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg)}
 body{font-family:'Inter',sans-serif;font-size:13px;color:var(--text)}
 #app{display:flex;height:100vh;width:100vw}
 
-/* ── WORLD ── */
+/* ââ WORLD ââ */
 #world-wrap{flex:1;position:relative;overflow:hidden;cursor:grab;background:#040408}
 #world-wrap.dragging{cursor:grabbing}
 #world-canvas{display:block;image-rendering:pixelated}
@@ -28,7 +28,7 @@ body{font-family:'Inter',sans-serif;font-size:13px;color:var(--text)}
   pointer-events:none;line-height:2;letter-spacing:.02em
 }
 
-/* ── SIDEBAR ── */
+/* ââ SIDEBAR ââ */
 #sidebar{
   width:268px;min-width:268px;display:flex;flex-direction:column;
   background:var(--surface);border-left:1px solid var(--border)
@@ -44,7 +44,7 @@ body{font-family:'Inter',sans-serif;font-size:13px;color:var(--text)}
   font-size:8px;font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:.04em
 }
 
-/* ── AGENT LIST ── */
+/* ââ AGENT LIST ââ */
 #agent-list{flex:1;overflow-y:auto;padding:6px}
 #agent-list::-webkit-scrollbar{width:3px}
 #agent-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
@@ -71,7 +71,7 @@ body{font-family:'Inter',sans-serif;font-size:13px;color:var(--text)}
 .s-dot.busy{background:var(--red)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* ── LIVE FEED ── */
+/* ââ LIVE FEED ââ */
 #chat-zone{display:flex;flex-direction:column;border-top:1px solid var(--border);height:240px;flex-shrink:0}
 #chat-head{
   padding:7px 12px;font-size:10px;font-weight:600;color:var(--text2);
@@ -97,35 +97,35 @@ body{font-family:'Inter',sans-serif;font-size:13px;color:var(--text)}
 <div id="app">
   <div id="world-wrap">
     <canvas id="world-canvas"></canvas>
-    <div id="hud">🖱 Arrastar para mover &nbsp;·&nbsp; 🔍 Scroll para zoom &nbsp;·&nbsp; Clique no mapa para mover Adi</div>
+    <div id="hud">ð± Arrastar para mover &nbsp;Â·&nbsp; ð Scroll para zoom &nbsp;Â·&nbsp; Clique no mapa para mover Adi</div>
   </div>
   <aside id="sidebar">
     <div id="sb-header">
       <div>
-        <div class="logo">TIME<br><span>GUIMARÃES</span></div>
-        <div style="font-size:9px;color:var(--text2);margin-top:3px">13 agentes • online</div>
+        <div class="logo">TIME<br><span>GUIMARÃES</span></div>
+        <div style="font-size:9px;color:var(--text2);margin-top:3px">13 agentes â¢ online</div>
       </div>
       <span class="badge">ATIVO</span>
     </div>
     <div id="agent-list"></div>
     <div id="chat-zone">
-      <div id="chat-head"><div id="sync-dot"></div><span id="chat-head-text">📡 LIVE FEED — COWORK</span></div>
+      <div id="chat-head"><div id="sync-dot"></div><span id="chat-head-text">ð¡ LIVE FEED â COWORK</span></div>
       <div id="chat-msgs"></div>
       <div id="task-bar"><span id="task-label">Aguardando tarefas...</span></div>
     </div>
   </aside>
 </div>
 <script>
-// ═══════════════════════════════════════════════════════════
-//  TIME GUIMARÃES  —  Virtual Office  v2
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+//  TIME GUIMARÃES  â  Virtual Office  v2
 //  Canvas-based engine: no absolute-div map, proper depth sort
-// ═══════════════════════════════════════════════════════════
+// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 
 const TS = 32;   // tile size (px)
 const MW = 42;   // map width  (tiles)
 const MH = 26;   // map height (tiles)
 
-// ── PALETTE ──────────────────────────────────────────────────
+// ââ PALETTE ââââââââââââââââââââââââââââââââââââââââââââââââââ
 const FLOOR = {
   outdoor:  '#0b1018',
   main:     '#0e1a2e',
@@ -153,111 +153,111 @@ const STATUS_CLR = {
   idle:'#607D8B', working:'#FF9800', done:'#4CAF50', checkpoint:'#2196F3', busy:'#F44336'
 };
 
-// ── ROOMS ────────────────────────────────────────────────────
+// ââ ROOMS ââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const ROOMS = [
   {id:'command',  name:'Sala de Comando',  x:1,  y:1,  w:13, h:9,  ft:'main'},
   {id:'creative', name:'Criativo & Copy',  x:16, y:1,  w:13, h:9,  ft:'creative'},
-  {id:'meeting',  name:'Sala de Reunião',  x:31, y:1,  w:10, h:9,  ft:'meeting'},
+  {id:'meeting',  name:'Sala de ReuniÃ£o',  x:31, y:1,  w:10, h:9,  ft:'meeting'},
   {id:'tech',     name:'Tech Hub',         x:1,  y:12, w:28, h:10, ft:'tech'},
   {id:'lounge',   name:'Lounge',           x:31, y:12, w:10, h:10, ft:'lounge'},
 ];
 
-// ── FURNITURE ────────────────────────────────────────────────
-// type → color scheme applied in drawFurniture()
+// ââ FURNITURE ââââââââââââââââââââââââââââââââââââââââââââââââ
+// type â color scheme applied in drawFurniture()
 const FURNITURE = [
   // Command Room
-  {id:'d1', t:'desk',     x:3,  y:3,  w:2, h:1, solid:1, e:'🖥️'},
-  {id:'d2', t:'desk',     x:8,  y:3,  w:2, h:1, solid:1, e:'🖥️'},
-  {id:'d3', t:'desk',     x:3,  y:6,  w:2, h:1, solid:1, e:'🖥️'},
-  {id:'d4', t:'desk',     x:8,  y:6,  w:2, h:1, solid:1, e:'🖥️'},
-  {id:'b1', t:'shelf',    x:2,  y:2,  w:1, h:2, solid:1, e:'📚'},
-  {id:'p1', t:'plant',    x:12, y:2,  w:1, h:1, solid:0, e:'🌱'},
+  {id:'d1', t:'desk',     x:3,  y:3,  w:2, h:1, solid:1, e:'ð¥ï¸'},
+  {id:'d2', t:'desk',     x:8,  y:3,  w:2, h:1, solid:1, e:'ð¥ï¸'},
+  {id:'d3', t:'desk',     x:3,  y:6,  w:2, h:1, solid:1, e:'ð¥ï¸'},
+  {id:'d4', t:'desk',     x:8,  y:6,  w:2, h:1, solid:1, e:'ð¥ï¸'},
+  {id:'b1', t:'shelf',    x:2,  y:2,  w:1, h:2, solid:1, e:'ð'},
+  {id:'p1', t:'plant',    x:12, y:2,  w:1, h:1, solid:0, e:'ð±'},
   // Creative Room
-  {id:'d5', t:'desk',     x:18, y:3,  w:2, h:1, solid:1, e:'🖥️'},
-  {id:'d6', t:'desk',     x:22, y:3,  w:2, h:1, solid:1, e:'🎨'},
-  {id:'d7', t:'desk',     x:18, y:6,  w:2, h:1, solid:1, e:'✏️'},
-  {id:'d8', t:'desk',     x:22, y:6,  w:2, h:1, solid:1, e:'🖌️'},
-  {id:'w1', t:'board',    x:17, y:2,  w:4, h:1, solid:1, e:'📋'},
-  {id:'p2', t:'plant_big',x:27, y:2,  w:1, h:1, solid:0, e:'🌿'},
+  {id:'d5', t:'desk',     x:18, y:3,  w:2, h:1, solid:1, e:'ð¥ï¸'},
+  {id:'d6', t:'desk',     x:22, y:3,  w:2, h:1, solid:1, e:'ð¨'},
+  {id:'d7', t:'desk',     x:18, y:6,  w:2, h:1, solid:1, e:'âï¸'},
+  {id:'d8', t:'desk',     x:22, y:6,  w:2, h:1, solid:1, e:'ðï¸'},
+  {id:'w1', t:'board',    x:17, y:2,  w:4, h:1, solid:1, e:'ð'},
+  {id:'p2', t:'plant_big',x:27, y:2,  w:1, h:1, solid:0, e:'ð¿'},
   // Meeting Room
-  {id:'mt', t:'mtable',   x:32, y:3,  w:7, h:5, solid:1, e:'📊'},
-  {id:'w2', t:'board',    x:32, y:2,  w:5, h:1, solid:1, e:'📋'},
-  {id:'p3', t:'plant',    x:39, y:2,  w:1, h:1, solid:0, e:'🌱'},
+  {id:'mt', t:'mtable',   x:32, y:3,  w:7, h:5, solid:1, e:'ð'},
+  {id:'w2', t:'board',    x:32, y:2,  w:5, h:1, solid:1, e:'ð'},
+  {id:'p3', t:'plant',    x:39, y:2,  w:1, h:1, solid:0, e:'ð±'},
   // Tech Room
-  {id:'d9', t:'desk',     x:5,  y:13, w:2, h:1, solid:1, e:'💻'},
-  {id:'da', t:'desk',     x:9,  y:13, w:2, h:1, solid:1, e:'💻'},
-  {id:'db', t:'desk',     x:13, y:13, w:2, h:1, solid:1, e:'💻'},
-  {id:'dc', t:'desk',     x:17, y:13, w:2, h:1, solid:1, e:'⚙️'},
-  {id:'dd', t:'desk',     x:21, y:13, w:2, h:1, solid:1, e:'🐙'},
+  {id:'d9', t:'desk',     x:5,  y:13, w:2, h:1, solid:1, e:'ð»'},
+  {id:'da', t:'desk',     x:9,  y:13, w:2, h:1, solid:1, e:'ð»'},
+  {id:'db', t:'desk',     x:13, y:13, w:2, h:1, solid:1, e:'ð»'},
+  {id:'dc', t:'desk',     x:17, y:13, w:2, h:1, solid:1, e:'âï¸'},
+  {id:'dd', t:'desk',     x:21, y:13, w:2, h:1, solid:1, e:'ð'},
   {id:'r1', t:'rack',     x:2,  y:13, w:1, h:3, solid:1, e:''},
   {id:'r2', t:'rack',     x:3,  y:13, w:1, h:3, solid:1, e:''},
-  {id:'p4', t:'plant_big',x:26, y:12, w:1, h:1, solid:0, e:'🌿'},
+  {id:'p4', t:'plant_big',x:26, y:12, w:1, h:1, solid:0, e:'ð¿'},
   // Lounge
-  {id:'c1', t:'couch',    x:33, y:14, w:3, h:2, solid:1, e:'🛋️'},
-  {id:'cf', t:'ctable',   x:34, y:17, w:2, h:1, solid:0, e:'☕'},
-  {id:'p5', t:'plant_big',x:39, y:13, w:1, h:1, solid:0, e:'🌿'},
-  {id:'p6', t:'plant',    x:31, y:20, w:1, h:1, solid:0, e:'🌱'},
+  {id:'c1', t:'couch',    x:33, y:14, w:3, h:2, solid:1, e:'ðï¸'},
+  {id:'cf', t:'ctable',   x:34, y:17, w:2, h:1, solid:0, e:'â'},
+  {id:'p5', t:'plant_big',x:39, y:13, w:1, h:1, solid:0, e:'ð¿'},
+  {id:'p6', t:'plant',    x:31, y:20, w:1, h:1, solid:0, e:'ð±'},
   // Outdoor
-  {id:'tr1',t:'tree',     x:0,  y:0,  w:1, h:1, solid:0, e:'🌳'},
-  {id:'tr2',t:'tree',     x:40, y:0,  w:1, h:1, solid:0, e:'🌳'},
-  {id:'tr3',t:'tree',     x:0,  y:24, w:1, h:1, solid:0, e:'🌲'},
+  {id:'tr1',t:'tree',     x:0,  y:0,  w:1, h:1, solid:0, e:'ð³'},
+  {id:'tr2',t:'tree',     x:40, y:0,  w:1, h:1, solid:0, e:'ð³'},
+  {id:'tr3',t:'tree',     x:0,  y:24, w:1, h:1, solid:0, e:'ð²'},
 ];
 
-// ── AGENTS ───────────────────────────────────────────────────
+// ââ AGENTS âââââââââââââââââââââââââââââââââââââââââââââââââââ
 const AGENT_DEF = [
-  {id:'adi',     name:'Adi',     role:'Orquestrador',  room:'command',  tx:5,  ty:5,  e:'🎯',
+  {id:'adi',     name:'Adi',     role:'Orquestrador',  room:'command',  tx:5,  ty:5,  e:'ð¯',
    s:{skin:'#F5CBA7',hair:'#253545',shirt:'#2980B9',pants:'#1A252F',shoes:'#131820'}},
-  {id:'ricardo', name:'Ricardo', role:'Pesquisador',   room:'command',  tx:9,  ty:5,  e:'🔍',
+  {id:'ricardo', name:'Ricardo', role:'Pesquisador',   room:'command',  tx:9,  ty:5,  e:'ð',
    s:{skin:'#FDEBD0',hair:'#D4AC0D',shirt:'#27AE60',pants:'#1C3428',shoes:'#131820'}},
-  {id:'bruno',   name:'Bruno',   role:'Revisor',       room:'command',  tx:5,  ty:7,  e:'✅',
+  {id:'bruno',   name:'Bruno',   role:'Revisor',       room:'command',  tx:5,  ty:7,  e:'â',
    s:{skin:'#D5A17A',hair:'#1C1C1C',shirt:'#78909C',pants:'#2C3E50',shoes:'#1A1A1A'}},
-  {id:'eduardo', name:'Eduardo', role:'Analista BI',   room:'command',  tx:9,  ty:7,  e:'📊',
+  {id:'eduardo', name:'Eduardo', role:'Analista BI',   room:'command',  tx:9,  ty:7,  e:'ð',
    s:{skin:'#C48B5E',hair:'#2C1810',shirt:'#E67E22',pants:'#2C3E50',shoes:'#1A1A1A'}},
-  {id:'ana',     name:'Ana',     role:'Writer',        room:'creative', tx:19, ty:5,  e:'✍️',
+  {id:'ana',     name:'Ana',     role:'Writer',        room:'creative', tx:19, ty:5,  e:'âï¸',
    s:{skin:'#F5CBA7',hair:'#6D3B2A',shirt:'#8E44AD',pants:'#2C3E50',shoes:'#1A1A1A'}},
-  {id:'camila',  name:'Camila',  role:'Designer',      room:'creative', tx:23, ty:5,  e:'🎨',
+  {id:'camila',  name:'Camila',  role:'Designer',      room:'creative', tx:23, ty:5,  e:'ð¨',
    s:{skin:'#FDEBD0',hair:'#E8C07D',shirt:'#E91E8C',pants:'#1A1A2E',shoes:'#1A1A1A'}},
-  {id:'larissa', name:'Larissa', role:'UX Designer',   room:'creative', tx:19, ty:8,  e:'🖌️',
+  {id:'larissa', name:'Larissa', role:'UX Designer',   room:'creative', tx:19, ty:8,  e:'ðï¸',
    s:{skin:'#F5CBA7',hair:'#C0392B',shirt:'#1ABC9C',pants:'#2C3E50',shoes:'#1A1A1A'}},
-  {id:'juliana', name:'Juliana', role:'WordPress',     room:'creative', tx:23, ty:8,  e:'🌐',
+  {id:'juliana', name:'Juliana', role:'WordPress',     room:'creative', tx:23, ty:8,  e:'ð',
    s:{skin:'#C48B5E',hair:'#1A1A1A',shirt:'#F39C12',pants:'#2C3E50',shoes:'#1A1A1A'}},
-  {id:'thiago',  name:'Thiago',  role:'Frontend Dev',  room:'tech',     tx:7,  ty:16, e:'💻',
+  {id:'thiago',  name:'Thiago',  role:'Frontend Dev',  room:'tech',     tx:7,  ty:16, e:'ð»',
    s:{skin:'#D5A17A',hair:'#1A1A1A',shirt:'#00BCD4',pants:'#1A252F',shoes:'#1A1A1A'}},
-  {id:'rafael',  name:'Rafael',  role:'Backend Dev',   room:'tech',     tx:11, ty:16, e:'⚙️',
+  {id:'rafael',  name:'Rafael',  role:'Backend Dev',   room:'tech',     tx:11, ty:16, e:'âï¸',
    s:{skin:'#C48B5E',hair:'#2C1810',shirt:'#F44336',pants:'#2C3E50',shoes:'#1A1A1A'}},
-  {id:'sofia',   name:'Sofia',   role:'Product',       room:'tech',     tx:15, ty:16, e:'📦',
+  {id:'sofia',   name:'Sofia',   role:'Product',       room:'tech',     tx:15, ty:16, e:'ð¦',
    s:{skin:'#FDEBD0',hair:'#6D3B2A',shirt:'#5C9BD6',pants:'#1A252F',shoes:'#1A1A1A'}},
-  {id:'marcos',  name:'Marcos',  role:'Automação n8n', room:'tech',     tx:19, ty:16, e:'🤖',
+  {id:'marcos',  name:'Marcos',  role:'AutomaÃ§Ã£o n8n', room:'tech',     tx:19, ty:16, e:'ð¤',
    s:{skin:'#D5A17A',hair:'#808080',shirt:'#2E7D32',pants:'#1A252F',shoes:'#1A1A1A'}},
-  {id:'felipe',  name:'Felipe',  role:'GitHub',        room:'tech',     tx:23, ty:16, e:'🐙',
+  {id:'felipe',  name:'Felipe',  role:'GitHub',        room:'tech',     tx:23, ty:16, e:'ð',
    s:{skin:'#F5CBA7',hair:'#1A1A1A',shirt:'#ECEFF1',pants:'#37474F',shoes:'#1A1A1A'}},
 ];
 
 const AMBIENT = {
-  adi:    ['Tudo sob controle.','Vamos executar.','Time, foquem!','Estratégia definida.'],
-  ricardo:['Pesquisa ok!','Dado interessante...','Fonte verificada.','Tendência mapeada.'],
-  bruno:  ['Revisando...','Achei um erro.','Qualidade ok!','Ajuste necessário.'],
-  eduardo:['Métricas em alta!','Dashboard pronto.','ROI positivo.','Dados analisados.'],
+  adi:    ['Tudo sob controle.','Vamos executar.','Time, foquem!','EstratÃ©gia definida.'],
+  ricardo:['Pesquisa ok!','Dado interessante...','Fonte verificada.','TendÃªncia mapeada.'],
+  bruno:  ['Revisando...','Achei um erro.','Qualidade ok!','Ajuste necessÃ¡rio.'],
+  eduardo:['MÃ©tricas em alta!','Dashboard pronto.','ROI positivo.','Dados analisados.'],
   ana:    ['Copy revisado!','Texto fluindo.','Pauta aprovada.','Escrevendo agora...'],
-  camila: ['Visual incrível!','Paleta perfeita.','Layout pronto!','Criatividade máxima!'],
-  larissa:['UX aprovada!','Fluxo otimizado.','Usuário vai amar.','Protótipo ok.'],
+  camila: ['Visual incrÃ­vel!','Paleta perfeita.','Layout pronto!','Criatividade mÃ¡xima!'],
+  larissa:['UX aprovada!','Fluxo otimizado.','UsuÃ¡rio vai amar.','ProtÃ³tipo ok.'],
   juliana:['Post publicado!','WordPress ok.','Plugin instalado.','SEO feito.'],
   thiago: ['Componente pronto.','Build ok!','CSS perfeito.','Deploy no ar.'],
-  rafael: ['API respondendo.','DB otimizado.','Query rápida!','Endpoint pronto.'],
+  rafael: ['API respondendo.','DB otimizado.','Query rÃ¡pida!','Endpoint pronto.'],
   sofia:  ['Sprint planejada.','Feature priorizada.','Roadmap atualizado.','Produto evoluindo.'],
-  marcos: ['Workflow ativo!','n8n automando.','Integração ok.','Trigger configurado.'],
+  marcos: ['Workflow ativo!','n8n automando.','IntegraÃ§Ã£o ok.','Trigger configurado.'],
   felipe: ['PR mergeado!','Pipeline verde.','Review feito.','Branch limpa.'],
 };
 
 const ORC_RESP = [
   t=>`Copy that! Distribuindo a tarefa para o time.`,
   t=>`Entendido. Ricardo, pesquise. Ana, prepare o copy.`,
-  t=>`Missão recebida. Time, vamos executar!`,
+  t=>`MissÃ£o recebida. Time, vamos executar!`,
   t=>`Analisando... Perfeito. Acionando os especialistas.`,
-  t=>`Roger that! Thiago, Rafael — vocês entram em ação.`,
+  t=>`Roger that! Thiago, Rafael â vocÃªs entram em aÃ§Ã£o.`,
 ];
 
-// ── COLLISION GRID ──────────────────────────────────────────
+// ââ COLLISION GRID ââââââââââââââââââââââââââââââââââââââââââ
 const GRID = (() => {
   const g = Array.from({length:MH}, ()=>new Uint8Array(MW));
   for(const r of ROOMS)
@@ -272,7 +272,7 @@ const GRID = (() => {
   return {ok:(tx,ty)=>ty>=0&&ty<MH&&tx>=0&&tx<MW&&g[ty][tx]===1};
 })();
 
-// ── AGENT STATE ──────────────────────────────────────────────
+// ââ AGENT STATE ââââââââââââââââââââââââââââââââââââââââââââââ
 let agents = AGENT_DEF.map(d=>({
   ...d, tx:d.tx, ty:d.ty, gx:d.tx, gy:d.ty,
   // smooth interpolated pixel pos
@@ -280,7 +280,7 @@ let agents = AGENT_DEF.map(d=>({
   status:'idle', bubble:null, bubTimer:0,
 }));
 
-// ── CAMERA & CANVAS ──────────────────────────────────────────
+// ââ CAMERA & CANVAS ââââââââââââââââââââââââââââââââââââââââââ
 let cam = {x:0, y:0, z:1.3};
 let tick = 0;
 
@@ -308,7 +308,7 @@ function clampCam(){
   cam.y = Math.min(mg, Math.max(cvs.height-wh-mg, cam.y));
 }
 
-// ── DRAW HELPERS ─────────────────────────────────────────────
+// ââ DRAW HELPERS âââââââââââââââââââââââââââââââââââââââââââââ
 function rr(x,y,w,h,r){
   if(ctx.roundRect){ctx.roundRect(x,y,w,h,r)}
   else{ctx.rect(x,y,w,h)}
@@ -327,7 +327,7 @@ function wrapTxt(txt,maxW){
   return lines;
 }
 
-// ── RENDER: outdoor ──────────────────────────────────────────
+// ââ RENDER: outdoor ââââââââââââââââââââââââââââââââââââââââââ
 function drawOutdoor(){
   ctx.fillStyle=FLOOR.outdoor;
   ctx.fillRect(0,0,MW*TS,MH*TS);
@@ -337,7 +337,7 @@ function drawOutdoor(){
   for(let y=0;y<=MH;y++){ctx.beginPath();ctx.moveTo(0,y*TS);ctx.lineTo(MW*TS,y*TS);ctx.stroke()}
 }
 
-// ── RENDER: rooms ────────────────────────────────────────────
+// ââ RENDER: rooms ââââââââââââââââââââââââââââââââââââââââââââ
 function drawRooms(){
   for(const r of ROOMS){
     const rx=r.x*TS, ry=r.y*TS, rw=r.w*TS, rh=r.h*TS;
@@ -370,7 +370,7 @@ function drawRooms(){
   }
 }
 
-// ── RENDER: furniture ────────────────────────────────────────
+// ââ RENDER: furniture ââââââââââââââââââââââââââââââââââââââââ
 function drawFurniture(f){
   const fx=f.x*TS, fy=f.y*TS, fw=f.w*TS, fh=f.h*TS;
   if(f.t==='plant'||f.t==='plant_big'||f.t==='tree'){
@@ -421,7 +421,7 @@ function drawFurniture(f){
   }
 }
 
-// ── RENDER: agent sprite (pixel art) ─────────────────────────
+// ââ RENDER: agent sprite (pixel art) âââââââââââââââââââââââââ
 function drawAgent(a){
   const cx = a.px + TS/2;
   const cy = a.py + TS - 2;
@@ -488,7 +488,7 @@ function drawAgent(a){
   if(a.bubble) drawBubble(cx,nty-4,a.bubble);
 }
 
-// ── RENDER: speech bubble ────────────────────────────────────
+// ââ RENDER: speech bubble ââââââââââââââââââââââââââââââââââââ
 function drawBubble(bx,by,txt){
   const lines=wrapTxt(txt,108);
   const lh=11, pad=7, bw=120;
@@ -507,7 +507,7 @@ function drawBubble(bx,by,txt){
   lines.forEach((l,i)=>ctx.fillText(l,bx,ry+pad+8+i*lh));
 }
 
-// ── MAIN RENDER ──────────────────────────────────────────────
+// ââ MAIN RENDER ââââââââââââââââââââââââââââââââââââââââââââââ
 function render(){
   ctx.clearRect(0,0,cvs.width,cvs.height);
   ctx.save();
@@ -531,7 +531,7 @@ function render(){
   ctx.restore();
 }
 
-// ── UPDATE LOOP ──────────────────────────────────────────────
+// ââ UPDATE LOOP ââââââââââââââââââââââââââââââââââââââââââââââ
 function stepAgent(a){
   if(a.tx===a.gx&&a.ty===a.gy) return;
   const dx=Math.sign(a.gx-a.tx), dy=Math.sign(a.gy-a.ty);
@@ -541,7 +541,7 @@ function stepAgent(a){
 
 function update(){
   tick++;
-  // move agents every 4 ticks (≈8fps movement at 20fps)
+  // move agents every 4 ticks (â8fps movement at 20fps)
   if(tick%4===0) agents.forEach(stepAgent);
 
   // smooth pixel position lerp
@@ -575,10 +575,10 @@ function update(){
 
 setInterval(update,50); // 20fps logic
 
-// ── RAF RENDER LOOP ──────────────────────────────────────────
+// ââ RAF RENDER LOOP ââââââââââââââââââââââââââââââââââââââââââ
 (function loop(){render();requestAnimationFrame(loop)})();
 
-// ── MOUSE INTERACTION ────────────────────────────────────────
+// ââ MOUSE INTERACTION ââââââââââââââââââââââââââââââââââââââââ
 let drag=false, ds={x:0,y:0}, cs={x:0,y:0};
 wrap.addEventListener('mousedown',e=>{
   drag=true;wrap.classList.add('dragging');
@@ -595,7 +595,7 @@ window.addEventListener('mouseup',e=>{
   if(!drag)return;
   drag=false;wrap.classList.remove('dragging');
   if(moved<5){
-    // click → move Adi
+    // click â move Adi
     const wx=(e.clientX-cam.x)/cam.z;
     const wy=(e.clientY-cam.y)/cam.z;
     const tx=Math.floor(wx/TS), ty=Math.floor(wy/TS);
@@ -634,7 +634,7 @@ wrap.addEventListener('touchmove',e=>{
 },{passive:true});
 wrap.addEventListener('touchend',e=>{drag=false},{passive:true});
 
-// ── UI: AGENT CARDS ──────────────────────────────────────────
+// ââ UI: AGENT CARDS ââââââââââââââââââââââââââââââââââââââââââ
 const list=document.getElementById('agent-list');
 
 function buildCards(){
@@ -673,7 +673,7 @@ function updateCards(){
 
 buildCards();
 
-// ── UI: LIVE FEED ─────────────────────────────────────────────
+// ââ UI: LIVE FEED âââââââââââââââââââââââââââââââââââââââââââââ
 const msgBox   = document.getElementById('chat-msgs');
 const taskLabel= document.getElementById('task-label');
 const syncDot  = document.getElementById('sync-dot');
@@ -692,8 +692,8 @@ function agentLabel(id){
   return a ? `${a.e} ${a.name} (${a.role})` : id;
 }
 
-// ── REAL-TIME STATE POLLING ───────────────────────────────────
-const STATE_URL = 'https://api.github.com/repos/girotripturismo-collab/time-guimaraes-office/contents/state.json';
+// ââ REAL-TIME STATE POLLING âââââââââââââââââââââââââââââââââââ
+const STATE_URL = 'https://raw.githubusercontent.com/girotripturismo-collab/time-guimaraes-office/main/state.json';
 let lastSha = null;
 let lastFeedLen = 0;
 let pollErrors = 0;
@@ -707,10 +707,10 @@ async function pollState(){
     const data = await r.json();
     pollErrors = 0;
 
-    if(data.sha === lastSha) return;   // nenhuma mudança
+    if(data.sha === lastSha) return;   // nenhuma mudanÃ§a
     lastSha = data.sha;
 
-    const _b64raw = atob(data.content.replace(/\n/g,''));
+    const _b64raw = JSON.stringify(data);
     const _u8 = new Uint8Array(_b64raw.length);
     for(let i=0;i<_b64raw.length;i++) _u8[i]=_b64raw.charCodeAt(i);
     const raw = new TextDecoder('utf-8').decode(_u8);
@@ -735,7 +735,7 @@ function applyState(state){
 
   // --- task bar ---
   if(state.task){
-    taskLabel.innerHTML = `<b style="color:var(--orange)">▶</b> ${state.task}`;
+    taskLabel.innerHTML = `<b style="color:var(--orange)">â¶</b> ${state.task}`;
     syncDot.className   = 'sync-dot ' + (state.status==='working'?'working':'live');
   } else {
     taskLabel.textContent = 'Aguardando tarefas do Cowork...';
@@ -753,11 +753,11 @@ function applyState(state){
     setTimeout(()=>{
       const tipo = msg.type === 'result' ? 'result' : 'bot';
       addMsg(msg.text, tipo, agentLabel(msg.agent));
-      // balão no mapa só para agentes em ação
+      // balÃ£o no mapa sÃ³ para agentes em aÃ§Ã£o
       const ag = agents.find(a=>a.id===msg.agent);
       if(ag && msg.bubble !== false){
         const short = msg.text.replace(/<[^>]+>/g,'').slice(0,52);
-        ag.bubble    = short + (msg.text.length > 52 ? '…' : '');
+        ag.bubble    = short + (msg.text.length > 52 ? 'â¦' : '');
         ag.bubTimer  = 160;
       }
       updateCards();
@@ -767,7 +767,7 @@ function applyState(state){
   updateCards();
 }
 
-// ── KICK-OFF ──────────────────────────────────────────────────
+// ââ KICK-OFF ââââââââââââââââââââââââââââââââââââââââââââââââââ
 addMsg('Conectando ao Cowork...', 'system', null);
 pollState();
 setInterval(pollState, 5000);
