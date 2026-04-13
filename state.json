@@ -1,15 +1,20 @@
 {
   "v": 2,
-  "ts": 1776079929833,
-  "status": "idle",
-  "task": null,
-  "activeAgents": [],
+  "ts": 1776081171610,
+  "status": "meeting",
+  "task": "Briefing criativo com o time",
+  "activeAgents": [
+    "adi",
+    "ana",
+    "camila",
+    "larissa"
+  ],
   "agentRooms": {
-    "adi": "boss",
+    "adi": "reuniao",
     "ricardo": "pesquisa",
-    "ana": "criativo",
-    "camila": "criativo",
-    "larissa": "criativo",
+    "ana": "reuniao",
+    "camila": "reuniao",
+    "larissa": "reuniao",
     "eduardo": "dados",
     "marcos": "dados",
     "juliana": "dados",
@@ -19,13 +24,42 @@
     "sofia": "dev",
     "bruno": "revisao"
   },
-  "meetings": [],
+  "meetings": [
+    {
+      "room": "reuniao",
+      "participants": [
+        "adi",
+        "ana",
+        "camila",
+        "larissa"
+      ],
+      "topic": "🎨 Briefing Criativo"
+    }
+  ],
   "feed": [
     {
       "agent": "adi",
       "text": "Escritório redesenhado. Time pronto para agir.",
       "ts": 0,
       "bubble": false
+    },
+    {
+      "agent": "adi",
+      "text": "Time criativo, reunião agora! Sala de Reunião.",
+      "ts": 1,
+      "bubble": true
+    },
+    {
+      "agent": "ana",
+      "text": "Chegando! Novo briefing em mãos ✍️",
+      "ts": 2,
+      "bubble": true
+    },
+    {
+      "agent": "camila",
+      "text": "Pronta para o brainstorm 🎨",
+      "ts": 3,
+      "bubble": true
     }
   ]
 }
