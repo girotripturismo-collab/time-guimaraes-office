@@ -679,13 +679,13 @@ function applyState(s) {
 // ─────────────────────────────────────────────
 const POLL = 'https://raw.githubusercontent.com/girotripturismo-collab/time-guimaraes-office/main/state.json';
 
-aqync function poll() {
+async function poll() {
   try {
     const r = await fetch(POLL + '?_=' + Date.now());
     const d = await r.json();
     applyState(d);
   } catch(e) {
-    document.getElem�ntById('connStatus').textContent = '⚠ Reconectando...';
+    document.getElementById('connStatus').textContent = '⚠ Reconectando...';
   }
 }
 
