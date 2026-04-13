@@ -1,30 +1,31 @@
 {
-  "v": 1,
-  "ts": 1775843529001,
-  "status": "working",
-  "task": "Diagnóstico e correção do Escritório Virtual",
-  "activeAgents": [
-    "adi",
-    "ricardo"
-  ],
+  "v": 2,
+  "ts": 1776079929833,
+  "status": "idle",
+  "task": null,
+  "activeAgents": [],
+  "agentRooms": {
+    "adi": "boss",
+    "ricardo": "pesquisa",
+    "ana": "criativo",
+    "camila": "criativo",
+    "larissa": "criativo",
+    "eduardo": "dados",
+    "marcos": "dados",
+    "juliana": "dados",
+    "thiago": "dev",
+    "rafael": "dev",
+    "felipe": "dev",
+    "sofia": "dev",
+    "bruno": "revisao"
+  },
+  "meetings": [],
   "feed": [
     {
       "agent": "adi",
-      "text": "Orquestrador online. Diagnóstico do escritório virtual iniciado.",
-      "ts": 1775843524001,
-      "bubble": true
-    },
-    {
-      "agent": "ricardo",
-      "text": "Pesquisador analisando logs de erro e network requests...",
-      "ts": 1775843526001,
-      "bubble": true
-    },
-    {
-      "agent": "adi",
-      "text": "Problema identificado: URL de polling incorreta (403). Correção em andamento.",
-      "ts": 1775843529001,
-      "bubble": true
+      "text": "Escritório redesenhado. Time pronto para agir.",
+      "ts": 0,
+      "bubble": false
     }
   ]
 }
