@@ -1,64 +1,34 @@
 {
   "v": 2,
-  "ts": 1776081171610,
-  "status": "meeting",
-  "task": "Briefing criativo com o time",
+  "ts": 1776098037302,
+  "status": "working",
+  "task": "Teste automático do webhook 🚀",
   "activeAgents": [
     "adi",
     "ana",
-    "camila",
-    "larissa"
+    "ricardo"
   ],
   "agentRooms": {
-    "adi": "reuniao",
+    "adi": "direcao",
+    "ana": "conteudo",
+    "camila": "design",
+    "larissa": "design",
     "ricardo": "pesquisa",
-    "ana": "reuniao",
-    "camila": "reuniao",
-    "larissa": "reuniao",
-    "eduardo": "dados",
-    "marcos": "dados",
-    "juliana": "dados",
-    "thiago": "dev",
-    "rafael": "dev",
-    "felipe": "dev",
-    "sofia": "dev",
-    "bruno": "revisao"
+    "fernanda": "trafego",
+    "jose": "financeiro",
+    "lucas": "dev",
+    "marcos": "dev",
+    "patricia": "rh",
+    "rafael": "atendimento",
+    "sophia": "reuniao",
+    "thiago": "conteudo"
   },
-  "meetings": [
-    {
-      "room": "reuniao",
-      "participants": [
-        "adi",
-        "ana",
-        "camila",
-        "larissa"
-      ],
-      "topic": "🎨 Briefing Criativo"
-    }
-  ],
+  "meetings": [],
   "feed": [
     {
       "agent": "adi",
-      "text": "Escritório redesenhado. Time pronto para agir.",
-      "ts": 0,
-      "bubble": false
-    },
-    {
-      "agent": "adi",
-      "text": "Time criativo, reunião agora! Sala de Reunião.",
-      "ts": 1,
-      "bubble": true
-    },
-    {
-      "agent": "ana",
-      "text": "Chegando! Novo briefing em mãos ✍️",
-      "ts": 2,
-      "bubble": true
-    },
-    {
-      "agent": "camila",
-      "text": "Pronta para o brainstorm 🎨",
-      "ts": 3,
+      "text": "Webhook automático funcionando! 🎉",
+      "ts": 1776098036457,
       "bubble": true
     }
   ]
