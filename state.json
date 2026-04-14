@@ -1,40 +1,40 @@
 {
   "v": 1,
-  "ts": 1776191302794,
-  "status": "working",
-  "task": "Teste de integraÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂ£o do dashboard em tempo real",
-  "activeAgents": [
-    "adi",
-    "ana",
-    "ricardo",
-    "camila",
-    "bruno"
-  ],
+  "ts": 1776191305317,
+  "status": "done",
+  "task": "Teste de integraÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ£o do dashboard em tempo real",
+  "activeAgents": [],
   "feed": [
     {
       "agent": "adi",
-      "text": "Nova demanda: <b>Teste de integraÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂ£o do dashboard em tempo real</b><br>Agentes: adi, ana, ricardo, camila, bruno",
+      "text": "Nova demanda: <b>Teste de integraÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ£o do dashboard em tempo real</b><br>Agentes: adi, ana, ricardo, camila, bruno",
       "ts": 1776191291230
     },
     {
       "agent": "ricardo",
-      "text": "ÃÂ°ÃÂÃÂÃÂ Pesquisando dados relevantes para a tarefa...",
+      "text": "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ Pesquisando dados relevantes para a tarefa...",
       "ts": 1776191294290
     },
     {
       "agent": "ana",
-      "text": "Ã¢ÂÂÃ¯Â¸Â Criando copy e roteiro com base na pesquisa...",
+      "text": "ÃÂ¢ÃÂÃÂÃÂ¯ÃÂ¸ÃÂ Criando copy e roteiro com base na pesquisa...",
       "ts": 1776191297317
     },
     {
       "agent": "camila",
-      "text": "ð¨ Desenvolvendo elementos visuais...",
+      "text": "Ã°ÂÂÂ¨ Desenvolvendo elementos visuais...",
       "ts": 1776191300262
     },
     {
       "agent": "bruno",
-      "text": "✅ Revisão concluída. Padrão 97/100 aprovado.",
+      "text": "â RevisÃ£o concluÃ­da. PadrÃ£o 97/100 aprovado.",
       "ts": 1776191302794
+    },
+    {
+      "agent": "adi",
+      "text": "✅ <b>Entrega concluída!</b><br>Integração confirmada! Dashboard espelha o Time Guimarães em tempo real a partir de agora.",
+      "ts": 1776191305317,
+      "type": "result"
     }
   ]
 }
