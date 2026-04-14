@@ -1,8 +1,8 @@
 {
   "v": 1,
-  "ts": 1776191291230,
+  "ts": 1776191294290,
   "status": "working",
-  "task": "Teste de integração do dashboard em tempo real",
+  "task": "Teste de integraÃ§Ã£o do dashboard em tempo real",
   "activeAgents": [
     "adi",
     "ana",
@@ -13,8 +13,13 @@
   "feed": [
     {
       "agent": "adi",
-      "text": "Nova demanda: <b>Teste de integração do dashboard em tempo real</b><br>Agentes: adi, ana, ricardo, camila, bruno",
+      "text": "Nova demanda: <b>Teste de integraÃ§Ã£o do dashboard em tempo real</b><br>Agentes: adi, ana, ricardo, camila, bruno",
       "ts": 1776191291230
+    },
+    {
+      "agent": "ricardo",
+      "text": "🔍 Pesquisando dados relevantes para a tarefa...",
+      "ts": 1776191294290
     }
   ]
 }
