@@ -1,35 +1,29 @@
 {
-  "v": 2,
-  "ts": 1776098037302,
+  "task": "Verificando integração Live Feed ↔ Cowork",
   "status": "working",
-  "task": "Teste automático do webhook 🚀",
   "activeAgents": [
     "adi",
-    "ana",
-    "ricardo"
+    "ricardo",
+    "ana"
   ],
-  "agentRooms": {
-    "adi": "direcao",
-    "ana": "conteudo",
-    "camila": "design",
-    "larissa": "design",
-    "ricardo": "pesquisa",
-    "fernanda": "trafego",
-    "jose": "financeiro",
-    "lucas": "dev",
-    "marcos": "dev",
-    "patricia": "rh",
-    "rafael": "atendimento",
-    "sophia": "reuniao",
-    "thiago": "conteudo"
-  },
-  "meetings": [],
   "feed": [
     {
       "agent": "adi",
-      "text": "Webhook automático funcionando! 🎉",
-      "ts": 1776098036457,
-      "bubble": true
+      "text": "🎯 Sistema online! Live Feed conectado ao Cowork.",
+      "type": "bot",
+      "ts": 1776187785641
+    },
+    {
+      "agent": "ricardo",
+      "text": "✅ Autenticação GitHub ativa. Polling a cada 5s.",
+      "type": "result",
+      "ts": 1776187785741
+    },
+    {
+      "agent": "ana",
+      "text": "🚀 UTF-8 corrigido. Escritório virtual sincronizado!",
+      "type": "bot",
+      "ts": 1776187785841
     }
   ]
 }
