@@ -1,29 +1,15 @@
 {
-  "task": "Verificando integração Live Feed ↔ Cowork",
+  "task": "Gerar 5 hooks magnéticos — Marketing de Turismo",
   "status": "working",
   "activeAgents": [
-    "adi",
-    "ricardo",
-    "ana"
+    "adi"
   ],
   "feed": [
     {
       "agent": "adi",
-      "text": "🎯 Sistema online! Live Feed conectado ao Cowork.",
+      "text": "📋 Missão recebida: <b>5 hooks magnéticos para turismo</b>. Acionando Ricardo (pesquisa) e Ana (copy).",
       "type": "bot",
-      "ts": 1776187785641
-    },
-    {
-      "agent": "ricardo",
-      "text": "✅ Autenticação GitHub ativa. Polling a cada 5s.",
-      "type": "result",
-      "ts": 1776187785741
-    },
-    {
-      "agent": "ana",
-      "text": "🚀 UTF-8 corrigido. Escritório virtual sincronizado!",
-      "type": "bot",
-      "ts": 1776187785841
+      "ts": 1776188696887
     }
   ]
 }
