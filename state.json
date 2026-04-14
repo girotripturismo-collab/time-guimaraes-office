@@ -2,14 +2,27 @@
   "task": "Gerar 5 hooks magnéticos — Marketing de Turismo",
   "status": "working",
   "activeAgents": [
-    "adi"
+    "adi",
+    "ricardo"
   ],
   "feed": [
     {
       "agent": "adi",
-      "text": "📋 Missão recebida: <b>5 hooks magnéticos para turismo</b>. Acionando Ricardo (pesquisa) e Ana (copy).",
+      "text": "📋 Missão recebida: 5 hooks magnéticos para turismo. Acionando Ricardo (pesquisa) e Ana (copy).",
       "type": "bot",
-      "ts": 1776188696887
+      "ts": 1776188712203
+    },
+    {
+      "agent": "ricardo",
+      "text": "🔍 Pesquisando tendências do nicho de turismo: dores do viajante, gatilhos emocionais, formatos virais em 2025...",
+      "type": "bot",
+      "ts": 1776188718203
+    },
+    {
+      "agent": "ricardo",
+      "text": "✅ Dados coletados: top dores = medo de gastar errado, saudade de viajar, viagem dos sonhos adiada. Padrão viral = hook de identidade + promessa de transformação.",
+      "type": "result",
+      "ts": 1776188720203
     }
   ]
 }
