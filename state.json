@@ -1,8 +1,8 @@
 {
   "v": 1,
-  "ts": 1776191297317,
+  "ts": 1776191300262,
   "status": "working",
-  "task": "Teste de integraÃÂ§ÃÂ£o do dashboard em tempo real",
+  "task": "Teste de integraÃÂÃÂ§ÃÂÃÂ£o do dashboard em tempo real",
   "activeAgents": [
     "adi",
     "ana",
@@ -13,18 +13,23 @@
   "feed": [
     {
       "agent": "adi",
-      "text": "Nova demanda: <b>Teste de integraÃÂ§ÃÂ£o do dashboard em tempo real</b><br>Agentes: adi, ana, ricardo, camila, bruno",
+      "text": "Nova demanda: <b>Teste de integraÃÂÃÂ§ÃÂÃÂ£o do dashboard em tempo real</b><br>Agentes: adi, ana, ricardo, camila, bruno",
       "ts": 1776191291230
     },
     {
       "agent": "ricardo",
-      "text": "ð Pesquisando dados relevantes para a tarefa...",
+      "text": "Ã°ÂÂÂ Pesquisando dados relevantes para a tarefa...",
       "ts": 1776191294290
     },
     {
       "agent": "ana",
-      "text": "✍️ Criando copy e roteiro com base na pesquisa...",
+      "text": "âï¸ Criando copy e roteiro com base na pesquisa...",
       "ts": 1776191297317
+    },
+    {
+      "agent": "camila",
+      "text": "🎨 Desenvolvendo elementos visuais...",
+      "ts": 1776191300262
     }
   ]
 }
