@@ -1,70 +1,34 @@
 {
-  "task": "Gerar 5 hooks magnéticos — Marketing de Turismo",
-  "status": "done",
+  "task": "Retrospectiva — O que deu errado no processo?",
+  "status": "working",
   "activeAgents": [
+    "adi",
+    "ricardo",
     "ana",
-    "adi"
+    "camila",
+    "larissa",
+    "juliana",
+    "thiago",
+    "rafael",
+    "sofia",
+    "marcos",
+    "felipe",
+    "bruno",
+    "eduardo"
   ],
+  "targetRoom": "reuniao",
   "feed": [
     {
       "agent": "adi",
-      "text": "📋 Missão: 5 hooks magnéticos para turismo. Ricardo pesquisou, Ana escreveu, Bruno revisou.",
+      "text": "📢 Atenção time! Reunião de retrospectiva na Sala de Reunião. TODOS presentes. Agora.",
       "type": "bot",
-      "ts": 1776188835573
+      "ts": 1776188934554
     },
     {
-      "agent": "ricardo",
-      "text": "✅ Briefing concluído: dores + gatilhos + padrão viral 2025 mapeados.",
-      "type": "result",
-      "ts": 1776188840573
-    },
-    {
-      "agent": "ana",
-      "text": "✍️ Hooks prontos! 5 ganchos aplicando identidade + dor + transformação:",
+      "agent": "thiago",
+      "text": "Já tô indo... mas posso reclamar do que aconteceu com o Canvas tab primeiro?",
       "type": "bot",
-      "ts": 1776188847573
-    },
-    {
-      "agent": "ana",
-      "text": "🪝 Hook 1 — ATRAÇÃO: \"Você trabalha o ano todo pra isso. Não deixa a próxima viagem ser mais uma decepção.\"",
-      "type": "result",
-      "ts": 1776188848573
-    },
-    {
-      "agent": "ana",
-      "text": "🪝 Hook 2 — AUTORIDADE: \"Depois de analisar 300 roteiros de viagem, descobri o erro que faz 90% das pessoas pagarem mais caro.\"",
-      "type": "result",
-      "ts": 1776188849573
-    },
-    {
-      "agent": "ana",
-      "text": "🪝 Hook 3 — CONEXÃO: \"Aquela viagem que você fica adiando desde 2020? Ela ainda pode acontecer. E eu vou te mostrar como.\"",
-      "type": "result",
-      "ts": 1776188850573
-    },
-    {
-      "agent": "ana",
-      "text": "🪝 Hook 4 — CURIOSIDADE: \"Tem um detalhe no seu pacote de viagem que a maioria das agências não te conta. Vou revelar aqui.\"",
-      "type": "result",
-      "ts": 1776188851573
-    },
-    {
-      "agent": "ana",
-      "text": "🪝 Hook 5 — VENDA: \"Se você vai viajar de qualquer jeito, faz sentido pagar menos e aproveitar mais. Deixa eu te mostrar como.\"",
-      "type": "result",
-      "ts": 1776188852573
-    },
-    {
-      "agent": "bruno",
-      "text": "✅ Revisão concluída. Todos os hooks aprovados — linguagem natural, sem clichê, prontos para gravar.",
-      "type": "result",
-      "ts": 1776188854573
-    },
-    {
-      "agent": "adi",
-      "text": "🎯 Entrega finalizada! 5 hooks revisados, categorizados por intenção. Time, missão cumprida!",
-      "type": "bot",
-      "ts": 1776188855573
+      "ts": 1776188935554
     }
   ]
 }
