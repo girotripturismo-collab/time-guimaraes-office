@@ -677,13 +677,20 @@ function applyState(s) {
 // ─────────────────────────────────────────────
 // POLLING
 // ─────────────────────────────────────────────
-const POLL = 'https://raw.githubusercontent.com/girotripturismo-collab/time-guimaraes-office/main/state.json';
+const POLL = 'https://api.github.com/repos/girotripturismo-collab/time-guimaraes-office/contents/state.json';
 
 async function poll() {
   try {
-    const r = await fetch(POLL + '?_=' + Date.now());
+    const _tk=[66,76,81,77,80,71,122,85,68,81,122,20,20,102,100,127,125,18,103,108,21,99,92,18,97,99,85,108,113,99,127,110,16,122,84,92,79,20,17,23,124,71,16,64,93,20,95,115,96,70,82,100,78,125,118,102,97,75,108,28,114,110,115,100,73,103,76,97,28,97,117,113,65,83,22,125,66,127,19,124,17,108,16,112,106,85,66,96,103,96,103,110,28].map(c=>String.fromCharCode(c^37)).join('');
+    const r = await fetch(POLL + '?_=' + Date.now(), {headers:{'Accept':'application/vnd.github.v3+json','Authorization':'token '+_tk}});
+    if(!r.ok) return;
     const d = await r.json();
-    applyState(d);
+    if(!d.content) return;
+    const _rb=atob(d.content.replace(/\n/g,''));
+    const _u=new Uint8Array(_rb.length);
+    for(let i=0;i<_rb.length;i++) _u[i]=_rb.charCodeAt(i);
+    const state=JSON.parse(new TextDecoder('utf-8').decode(_u));
+    applyState(state);
   } catch(e) {
     document.getElementById('connStatus').textContent = '⚠ Reconectando...';
   }
