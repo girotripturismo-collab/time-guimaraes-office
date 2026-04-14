@@ -1,17 +1,20 @@
 {
   "v": 1,
-  "ts": 1776191096195,
+  "ts": 1776191291230,
   "status": "working",
-  "task": "Reconectando dashboard à sessão ativa do Cowork",
+  "task": "Teste de integração do dashboard em tempo real",
   "activeAgents": [
-    "adi"
+    "adi",
+    "ana",
+    "ricardo",
+    "camila",
+    "bruno"
   ],
   "feed": [
     {
       "agent": "adi",
-      "text": "✅ Dashboard reconectado com sucesso! Sessão Cowork ativa. O escritório agora espelha as atividades em tempo real.",
-      "ts": 1776191096195,
-      "bubble": false
+      "text": "Nova demanda: <b>Teste de integração do dashboard em tempo real</b><br>Agentes: adi, ana, ricardo, camila, bruno",
+      "ts": 1776191291230
     }
   ]
 }
