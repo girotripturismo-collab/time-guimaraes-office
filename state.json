@@ -1,23 +1,18 @@
 {
   "v": 1,
-  "ts": 1776191422376,
+  "ts": 1777983541179,
   "status": "working",
-  "task": "Criar pixel art do Time Guimaraes completo",
+  "task": "Adicionar nó Registrar Sync Status nos 6 workflows n8n",
   "activeAgents": [
     "adi",
-    "camila",
+    "marcos",
     "bruno"
   ],
   "feed": [
     {
       "agent": "adi",
-      "text": "Nova demanda: <b>Criar pixel art do Time Guimaraes completo</b><br>Agentes: adi, camila, bruno",
-      "ts": 1776191417541
-    },
-    {
-      "agent": "camila",
-      "text": "Desenhando cada personagem pixel a pixel... 13 sprites sendo criados com PIL 🎨",
-      "ts": 1776191422376
+      "text": "📋 Nova demanda: <b>Adicionar nó Registrar Sync Status nos 6 workflows n8n</b><br>Agentes: adi, marcos, bruno",
+      "ts": 1777983541179
     }
   ]
 }
