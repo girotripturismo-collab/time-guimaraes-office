@@ -1,8 +1,8 @@
 {
   "v": 1,
-  "ts": 1777983541179,
+  "ts": 1777983692323,
   "status": "working",
-  "task": "Adicionar nó Registrar Sync Status nos 6 workflows n8n",
+  "task": "Adicionar Sync Status nos 6 workflows n8n",
   "activeAgents": [
     "adi",
     "marcos",
@@ -11,8 +11,8 @@
   "feed": [
     {
       "agent": "adi",
-      "text": "📋 Nova demanda: <b>Adicionar nó Registrar Sync Status nos 6 workflows n8n</b><br>Agentes: adi, marcos, bruno",
-      "ts": 1777983541179
+      "text": "📋 Nova demanda: <b>Adicionar Sync Status nos 6 workflows n8n</b>",
+      "ts": 1777983692323
     }
   ]
 }
