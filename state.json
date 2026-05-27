@@ -1,18 +1,21 @@
 {
   "v": 1,
-  "ts": 1777983692323,
+  "ts": 1779905924246,
   "status": "working",
-  "task": "Adicionar Sync Status nos 6 workflows n8n",
+  "task": "Análise aprofundada da plataforma Cortex + Arquitetura de IA",
   "activeAgents": [
     "adi",
-    "marcos",
+    "ricardo",
+    "eduardo",
+    "thiago",
+    "rafael",
     "bruno"
   ],
   "feed": [
     {
       "agent": "adi",
-      "text": "📋 Nova demanda: <b>Adicionar Sync Status nos 6 workflows n8n</b>",
-      "ts": 1777983692323
+      "text": "📋 Nova demanda: <b>Análise aprofundada da plataforma Cortex + Arquitetura de IA</b><br>Agentes: adi, ricardo, eduardo, thiago, rafael, bruno",
+      "ts": 1779905924246
     }
   ]
 }
